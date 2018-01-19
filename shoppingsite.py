@@ -77,16 +77,17 @@ def show_shopping_cart():
     # been added to the session
     cart = {}
     total = 0
-    for melon_id in session["cart"]:
-        melon = melons.get_by_id(melon_id)
-        cart[melon.common_name] = {
-            "count": session["cart"][melon_id],
-            "price": melon.price,
-            "total": session["cart"][melon_id] * melon.price
-        }
-        total += session["cart"][melon_id] * melon.price
+    if session.get("cart"):
+        for melon_id in session["cart"]:
+            melon = melons.get_by_id(melon_id)
+            cart[melon.common_name] = {
+                "count": session["cart"][melon_id],
+                "price": "${:,.2f}".format(melon.price),
+                "total": "${:,.2f}".format(session["cart"][melon_id] * melon.price)
+            }
+            total += session["cart"][melon_id] * melon.price
     return render_template("cart.html",
-                            cart=cart, total=total)
+                           cart=cart, total="${:,.2f}".format(total))
 
 
 @app.route("/add_to_cart/<melon_id>")

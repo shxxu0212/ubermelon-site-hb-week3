@@ -17,14 +17,14 @@
         <tr>
             <td>{{ melon }}</td>
             <td>{{ cart[melon]["count"] }}</td>
-            <td>${{ cart[melon]["price"] }}</td>
-            <td>${{ cart[melon]["total"] }} </td>
+            <td>{{ cart[melon]["price"] }}</td>
+            <td>{{ cart[melon]["total"] }} </td>
         </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <h3>Total: ${{ total }} </h3>
+    <h3>Total: {{ total }} </h3>
 
     <a href="/checkout" class="btn btn-large btn-primary">Check Out</a>
 
